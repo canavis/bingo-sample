@@ -8,21 +8,30 @@
   <title>Vue.js App</title>
 </head>
 <body>
-  <h1>ビンゴ！</h1>
-  <div id="app" v-cloak>
-    <ul>
-      <!-- <li><input type="number" v-model="minNumber">から</li> -->
-      <li>最大番号<input type="number" v-model="maxNumber"></li>
-    </ul>
-    <button v-on:click="setNumber">セット！</button>
-    <p>出てきたのは〜 {{ currentNumber }} ！</p>
-    <p v-if="numberAllComplete">全ての玉が出ました。</p>
-    <p v-if="!numberAllComplete"><button v-on:click="stopNumber">ストップ</button></p>
-    <div>
-      <p>出てきた玉</p>
+  <div class="bng-wrap">
+    <h1>Let's Play BINGO!</h1>
+    <button onclick="location.reload();">リセット</button>
+    <div id="app" v-cloak>
+      <div v-if="!setNumberComplete">
+        <p>MAX Number<input type="number" v-model="maxNumber"></p>
+        <p v-if="maxNumberValidationError">1以上100未満の数値で指定してください。</p>
+        <button v-on:click="setNumber">セット！</button>
+      </div>
+      <div v-if="setNumberComplete">
+        <p>MAX Number is<span>{{ maxNumber }}</span></p>
+      </div>
       <ul>
-        <li v-for="(item, index) in chosenNumber" v-if="item.number">{{ item.number }}</li>
+        <li v-for="(item, index) in number" class="">{{ item.id }}</li>
       </ul>
+      <p>出てきたのは〜 {{ currentNumber }} ！</p>
+      <p v-if="numberAllComplete">全ての玉が出ました。</p>
+      <p v-if="!numberAllComplete"><button v-on:click="stopNumber">ストップ</button></p>
+      <div>
+        <p>出てきた玉</p>
+        <ul>
+          <li v-for="(item, index) in chosenNumber" v-if="item.number">{{ item.number }}</li>
+        </ul>
+      </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>

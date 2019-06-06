@@ -1,1 +1,12 @@
 [v-cloak] {display: none;}
+
+input {
+  padding: 5px;
+  font-size: 18px;
+}
+
+.bng-wrap {
+  width: 1080px;
+  margin: 0 auto;
+  text-align: center;
+}
