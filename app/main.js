@@ -15,7 +15,6 @@ var app = new Vue({
     maxNumberEl.addEventListener('click', (e) => {
       e.currentTarget.select();
     });
-
   },
   methods: {
     setNumber: function() {
