@@ -11,23 +11,27 @@
   <div class="bng-wrap">
     <h1>Let's Play BINGO!</h1>
     <div id="app" v-cloak>
-      <div v-if="!isStartBingo">
-        <p>Set MAX Number</p>
-        <p><input type="number" v-model="maxNumber" class="input"></p>
-        <p v-if="maxNumberValidationError" class="error-text">Set a value between 1 and less than 100.</p>
-        <button v-on:click="setNumber" class="btn btn--information btn-set-number">Set number</button>
-      </div>
-      <div v-if="isStartBingo" transition="expand">
-        <div v-if="!isFinishBingo">
-          <p v-if="isShuffle"><button v-on:click="stopShuffle" class="btn btn--information">STOP!</button></p>
-          <p v-if="!isShuffle"><button v-on:click="startShuffle" class="btn btn--information">SPIN!</button></p>
+      <transition name="bng-setting">
+        <div v-if="!isStartBingo">
+          <p>Set MAX Number</p>
+          <p><input type="number" v-model="maxNumber" id="max-number" class="input"></p>
+          <p v-if="maxNumberValidationError" class="error-text">Set a value between 1 and less than 100.</p>
+          <button v-on:click="setNumber" class="btn btn--information btn-set-number">Set number</button>
         </div>
-        <p class="choice-number">{{ shuffleNumber }}</p>
-        <ul class="number-list">
-          <li v-for="(item, index) in chosenNumber" v-bind:class="[item]">{{ item.id }}</li>
-        </ul>
-        <button onclick="location.reload();" class="btn btn--small btn--danger btn-reset">Reset</button>
-      </div>
+      </transition>
+      <transition name="bng-main">
+        <div v-if="isStartBingo">
+          <div v-if="!isFinishBingo">
+            <p v-if="isShuffle"><button v-on:click="stopShuffle" class="btn btn--information">STOP!</button></p>
+            <p v-if="!isShuffle"><button v-on:click="startShuffle" class="btn btn--information">SPIN!</button></p>
+          </div>
+          <p class="choice-number">{{ shuffleNumber }}</p>
+          <ul class="number-list">
+            <li v-for="(item, index) in chosenNumber" v-bind:class="[item]">{{ item.id }}</li>
+          </ul>
+          <button onclick="location.reload();" class="btn btn--small btn--danger btn-reset">Reset</button>
+        </div>
+      </transition>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>

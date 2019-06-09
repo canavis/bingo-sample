@@ -8,7 +8,14 @@ var app = new Vue({
     maxNumberValidationError: false,
     isStartBingo: false,
     isFinishBingo: false,
-    isShuffle: false
+    isShuffle: false,
+  },
+  mounted () {
+    const maxNumberEl = document.getElementById('max-number');
+    maxNumberEl.addEventListener('click', (e) => {
+      e.currentTarget.select();
+    });
+
   },
   methods: {
     setNumber: function() {
@@ -43,7 +50,6 @@ var app = new Vue({
     choiceNumber: function () {
       // 残り番号からランダムに選択
       let random = Math.floor(Math.random() * this.remainNumber.length);
-console.log(random);
       return this.remainNumber[random];
     },
     startShuffle: function () {
